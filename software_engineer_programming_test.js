@@ -154,16 +154,21 @@ function displayResults(data) {
  * ************************************************************************ */
 
 async function getInvestableProperties(top_level_region) {
+  if (typeof top_level_region !== 'string') {
+    return { properties: [] }
+  }
   const regions = (await getAllRegions()).regions;
   const investable = (await getInvestableRegions()).regions;
   const filteredRegions = regions
     .filter(record => (
       record.parent === top_level_region
       &&
-      investable.includes(record.name)))
+      investable.includes(record.name)
+      ))
     .map(region => {
       return region.name
     });
+  filteredRegions.push(top_level_region);
   return getPropertiesByRegion(filteredRegions.join());
 }
 
@@ -173,4 +178,4 @@ async function getInvestableProperties(top_level_region) {
 //getAllRegions().then(displayResults);
 //getInvestableRegions().then(displayResults);
 //getPropertiesByRegion('twickenham').then(displayResults);
-getInvestableProperties('manchester').then(displayResults);
+getInvestableProperties('').then(displayResults);
