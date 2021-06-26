@@ -159,23 +159,41 @@ async function getInvestableProperties(top_level_region) {
   }
   const regions = (await getAllRegions()).regions;
   const investable = (await getInvestableRegions()).regions;
-  const filteredRegions = regions
-    .filter(record => (
-      record.parent === top_level_region
-      &&
-      investable.includes(record.name)
-      ))
-    .map(region => {
-      return region.name
-    });
+  const allDescendentRegions = await getAllDescendentRegions(top_level_region, regions)
+  const filteredRegions = allDescendentRegions.filter(record => (
+    investable.includes(record)
+  ));
   filteredRegions.push(top_level_region);
   return getPropertiesByRegion(filteredRegions.join());
 }
 
+async function getAllDescendentRegions(top_level_region, allRegions, descendantRegions = []) {
+  if (top_level_region === '') {
+    return descendantRegions
+  }
+  const regionMaxLevelParent = allRegions.find(region => region.name === top_level_region && region.parent === '')
+  if (regionMaxLevelParent) {
+    return descendantRegions.concat(filterDescendentNames(top_level_region, allRegions))
+  }
+  return getAllDescendentRegions((
+    allRegions.find(region => region.name === top_level_region && region.parent !== '')).parent,
+    allRegions,
+    descendantRegions.concat(filterDescendentNames(top_level_region, allRegions)))
+}
 
+function filterDescendentNames(top_level_region, regions) {
+  return regions
+    .filter(record => (
+      record.parent === top_level_region
+    ))
+    .map(region => {
+      return region.name
+    })
+}
 
 /* helpers to get you started */
 //getAllRegions().then(displayResults);
 //getInvestableRegions().then(displayResults);
-//getPropertiesByRegion('twickenham').then(displayResults);
-getInvestableProperties('').then(displayResults);
+//getPropertiesByRegion('twickenham').then(displayResults)
+//getAllDescendentRegions('richmond upon thames').then(displayResults);;
+getInvestableProperties('richmond upon thames').then(displayResults);
