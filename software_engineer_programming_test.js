@@ -32,37 +32,94 @@ function waitFor(milliseconds) {
 
 async function getAllRegions() {
   const regions = {
-    regions: [
-      { name: 'blackrod', parent: 'bolton' },
-      { name: 'bolton', parent: 'manchester' },
-      { name: 'bury', parent: 'manchester' },
-      { name: 'camden', parent: 'central london' },
-      { name: 'camden town', parent: 'camden' },
-      { name: 'central london', parent: 'london' },
-      { name: 'covent garden', parent: 'westminster' },
-      { name: 'croydon', parent: 'south-west london' },
-      { name: 'east london', parent: 'london' },
-      { name: 'farnworth', parent: 'bolton' },
-      { name: 'hatton garden', parent: 'camden' },
-      { name: 'heywood', parent: 'rochdale' },
-      { name: 'holborn', parent: 'camden' },
-      { name: 'kensington and chelsea', parent: 'london' },
-      { name: 'kew', parent: 'richmond upon thames' },
-      { name: 'kingston upon thames', parent: 'south-west london' },
-      { name: 'london', parent: '' },
-      { name: 'manchester', parent: '' },
-      { name: 'middleton', parent: 'rochdale' },
-      { name: 'north london', parent: 'london' },
-      { name: 'oldham', parent: 'manchester' },
-      { name: 'richmond upon thames', parent: 'south-west london' },
-      { name: 'rochdale', parent: 'manchester' },
-      { name: 'south london', parent: 'london' },
-      { name: 'south-west london', parent: 'london' },
-      { name: 'twickenham', parent: 'richmond upon thames' },
-      { name: 'west london', parent: 'london' },
-      { name: 'westminster', parent: 'central london' },
-      { name: 'wimbledon', parent: 'south-west london' },
-    ],
+    regions: [{
+      name: 'blackrod',
+      parent: 'bolton'
+    }, {
+      name: 'bolton',
+      parent: 'manchester'
+    }, {
+      name: 'bury',
+      parent: 'manchester'
+    }, {
+      name: 'camden',
+      parent: 'central london'
+    }, {
+      name: 'camden town',
+      parent: 'camden'
+    }, {
+      name: 'central london',
+      parent: 'london'
+    }, {
+      name: 'covent garden',
+      parent: 'westminster'
+    }, {
+      name: 'croydon',
+      parent: 'south-west london'
+    }, {
+      name: 'east london',
+      parent: 'london'
+    }, {
+      name: 'farnworth',
+      parent: 'bolton'
+    }, {
+      name: 'hatton garden',
+      parent: 'camden'
+    }, {
+      name: 'heywood',
+      parent: 'rochdale'
+    }, {
+      name: 'holborn',
+      parent: 'camden'
+    }, {
+      name: 'kensington and chelsea',
+      parent: 'london'
+    }, {
+      name: 'kew',
+      parent: 'richmond upon thames'
+    }, {
+      name: 'kingston upon thames',
+      parent: 'south-west london'
+    }, {
+      name: 'london',
+      parent: ''
+    }, {
+      name: 'manchester',
+      parent: ''
+    }, {
+      name: 'middleton',
+      parent: 'rochdale'
+    }, {
+      name: 'north london',
+      parent: 'london'
+    }, {
+      name: 'oldham',
+      parent: 'manchester'
+    }, {
+      name: 'richmond upon thames',
+      parent: 'south-west london'
+    }, {
+      name: 'rochdale',
+      parent: 'manchester'
+    }, {
+      name: 'south london',
+      parent: 'london'
+    }, {
+      name: 'south-west london',
+      parent: 'london'
+    }, {
+      name: 'twickenham',
+      parent: 'richmond upon thames'
+    }, {
+      name: 'west london',
+      parent: 'london'
+    }, {
+      name: 'westminster',
+      parent: 'central london'
+    }, {
+      name: 'wimbledon',
+      parent: 'south-west london'
+    },],
   };
 
   await waitFor(Math.random() * 1500);
@@ -81,16 +138,31 @@ async function getAllRegions() {
  * ************************************************************************ */
 async function getPropertiesByRegion(regions) {
   const properties = {
-    properties: [
-      { address: 'Whitton Rd, Twickenham TW2 7BA', region: 'twickenham' },
-      { address: 'Royal Botanic Gardens, Kew, Richmond, Surrey, TW9 3AE', region: 'kew' },
-      { address: 'Plough Ln, London SW17 0BL', region: 'wimbledon' },
-      { address: 'Stables Market, Chalk Farm Road, London NW1', region: 'camden town' },
-      { address: 'Westminster, London SW1A 0AA', region: 'westminster' },
-      { address: 'The Esplanade, Rochdale OL16 1AQ', region: 'rochdale' },
-      { address: 'The Old Town Hall, Parliament Square, Greaves Street, Oldham, OL1 1QN', region: 'oldham' },
-      { address: 'Castle House, Castle Rd, Bury BL9 8QT', region: 'bury' },
-    ],
+    properties: [{
+      address: 'Whitton Rd, Twickenham TW2 7BA',
+      region: 'twickenham'
+    }, {
+      address: 'Royal Botanic Gardens, Kew, Richmond, Surrey, TW9 3AE',
+      region: 'kew'
+    }, {
+      address: 'Plough Ln, London SW17 0BL',
+      region: 'wimbledon'
+    }, {
+      address: 'Stables Market, Chalk Farm Road, London NW1',
+      region: 'camden town'
+    }, {
+      address: 'Westminster, London SW1A 0AA',
+      region: 'westminster'
+    }, {
+      address: 'The Esplanade, Rochdale OL16 1AQ',
+      region: 'rochdale'
+    }, {
+      address: 'The Old Town Hall, Parliament Square, Greaves Street, Oldham, OL1 1QN',
+      region: 'oldham'
+    }, {
+      address: 'Castle House, Castle Rd, Bury BL9 8QT',
+      region: 'bury'
+    },],
   };
 
   const properties_to_return = {
@@ -155,11 +227,13 @@ function displayResults(data) {
 
 async function getInvestableProperties(top_level_region) {
   if (typeof top_level_region !== 'string' || top_level_region === '') {
-    return { properties: [] }
+    return {
+      properties: []
+    };
   }
   const regions = (await getAllRegions()).regions;
   const investable = (await getInvestableRegions()).regions;
-  const allDescendentRegions = await getAllDescendentRegions(top_level_region, regions)
+  const allDescendentRegions = await getAllDescendentRegions(top_level_region, regions);
   const filteredRegions = allDescendentRegions.filter(record => (
     investable.includes(record)
   ));
@@ -168,14 +242,14 @@ async function getInvestableProperties(top_level_region) {
 }
 
 async function getAllDescendentRegions(top_level_region, allRegions, descendantRegions = []) {
-  const regionMaxLevelParent = allRegions.find(region => region.name === top_level_region && region.parent === '')
+  const regionMaxLevelParent = allRegions.find(region => region.name === top_level_region && region.parent === '');
   if (regionMaxLevelParent) {
-    return descendantRegions.concat(filterDescendentNames(top_level_region, allRegions))
+    return descendantRegions.concat(filterDescendentNames(top_level_region, allRegions));
   }
   return getAllDescendentRegions((
     allRegions.find(region => region.name === top_level_region && region.parent !== '')).parent,
     allRegions,
-    descendantRegions.concat(filterDescendentNames(top_level_region, allRegions)))
+    descendantRegions.concat(filterDescendentNames(top_level_region, allRegions)));
 }
 
 function filterDescendentNames(top_level_region, regions) {
@@ -184,8 +258,8 @@ function filterDescendentNames(top_level_region, regions) {
       record.parent === top_level_region
     ))
     .map(region => {
-      return region.name
-    })
+      return region.name;
+    });
 }
 
 /* helpers to get you started */
