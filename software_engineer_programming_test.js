@@ -154,7 +154,7 @@ function displayResults(data) {
  * ************************************************************************ */
 
 async function getInvestableProperties(top_level_region) {
-  if (typeof top_level_region !== 'string') {
+  if (typeof top_level_region !== 'string' || top_level_region === '') {
     return { properties: [] }
   }
   const regions = (await getAllRegions()).regions;
@@ -168,9 +168,6 @@ async function getInvestableProperties(top_level_region) {
 }
 
 async function getAllDescendentRegions(top_level_region, allRegions, descendantRegions = []) {
-  if (top_level_region === '') {
-    return descendantRegions
-  }
   const regionMaxLevelParent = allRegions.find(region => region.name === top_level_region && region.parent === '')
   if (regionMaxLevelParent) {
     return descendantRegions.concat(filterDescendentNames(top_level_region, allRegions))
@@ -196,4 +193,4 @@ function filterDescendentNames(top_level_region, regions) {
 //getInvestableRegions().then(displayResults);
 //getPropertiesByRegion('twickenham').then(displayResults)
 //getAllDescendentRegions('richmond upon thames').then(displayResults);;
-getInvestableProperties('richmond upon thames').then(displayResults);
+getInvestableProperties('covent garden').then(displayResults);
