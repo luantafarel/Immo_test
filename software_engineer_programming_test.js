@@ -226,12 +226,17 @@ function displayResults(data) {
  * ************************************************************************ */
 
 async function getInvestableProperties(top_level_region) {
-  if (typeof top_level_region !== 'string' || top_level_region === '') {
+  if (typeof top_level_region !== 'string' || top_level_region === '' ) {
     return {
       properties: []
     };
   }
   const regions = (await getAllRegions()).regions;
+  if (!regions.find(region => region.name === top_level_region )) {
+    return {
+      properties: []
+    };
+  } 
   const investable = (await getInvestableRegions()).regions;
   const allDescendentRegions = await getAllDescendentRegions(top_level_region, regions);
   const filteredRegions = allDescendentRegions.filter(record => (
@@ -267,4 +272,4 @@ function filterDescendentNames(top_level_region, regions) {
 //getInvestableRegions().then(displayResults);
 //getPropertiesByRegion('twickenham').then(displayResults)
 //getAllDescendentRegions('richmond upon thames').then(displayResults);;
-getInvestableProperties('covent garden').then(displayResults);
+getInvestableProperties('heywoods').then(displayResults);
