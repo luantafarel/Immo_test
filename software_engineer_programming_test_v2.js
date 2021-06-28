@@ -279,39 +279,39 @@ async function getInvestableProperties(top_level_region) {
     };
   }
   const investable = (await getInvestableRegions()).regions;
-  const allDescendentRegions = await getAllParentRegions(
+  const allDescendentRegions = await getAllDescendentRegions(
     top_level_region,
     regions
   );
-  const filteredRegions = allDescendentRegions.filter((record) =>
-    investable.includes(record)
-  );
-  filteredRegions.push(top_level_region);
+  const filteredRegions = [
+    ...new Set(allDescendentRegions.join().split(",")),
+  ].filter((record) => investable.includes(record));
   return getPropertiesByRegion(filteredRegions.join());
 }
 
-async function getAllParentRegions(
+function getAllDescendentRegions(
   top_level_region,
   allRegions,
   descendantRegions = []
 ) {
-  const regionMaxLevelParent = allRegions.find(
-    (region) => region.name === top_level_region && region.parent === ""
+  const regionMinLevelDescendent = allRegions.find(
+    (region) => region.parent === top_level_region
   );
-  if (regionMaxLevelParent) {
-    return descendantRegions.concat(
-      filterDescendentNames(top_level_region, allRegions)
-    );
+  if (!regionMinLevelDescendent) {
+    return descendantRegions.concat(top_level_region);
   }
-  return getAllParentRegions(
-    allRegions.find(
-      (region) => region.name === top_level_region && region.parent !== ""
-    ).parent,
-    allRegions,
-    descendantRegions.concat(
-      filterDescendentNames(top_level_region, allRegions)
-    )
+
+  const filteredDescendents = filterDescendentNames(
+    top_level_region,
+    allRegions
   );
+  return filteredDescendents.map((filteredDescendent) => {
+    return getAllDescendentRegions(
+      filteredDescendent,
+      allRegions,
+      descendantRegions.concat(filteredDescendent)
+    );
+  });
 }
 
 function filterDescendentNames(top_level_region, regions) {
@@ -326,5 +326,5 @@ function filterDescendentNames(top_level_region, regions) {
 //getAllRegions().then(displayResults);
 //getInvestableRegions().then(displayResults);
 //getPropertiesByRegion('twickenham').then(displayResults)
-//getAllParentRegions('richmond upon thames').then(displayResults);;
-getInvestableProperties("heywoods").then(displayResults);
+//getAllDescendentRegions('richmond upon thames').then(displayResults);;
+getInvestableProperties("manchester").then(displayResults);
