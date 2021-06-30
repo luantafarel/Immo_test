@@ -283,7 +283,11 @@ async function getInvestableProperties(top_level_region) {
     top_level_region,
     regions
   );
-  console.log(`This is the whole tree for ${top_level_region} = ${[...new Set(allDescendentRegions.join().split(","))]}`)
+  console.log(
+    `This is the whole tree for ${top_level_region} = ${[
+      ...new Set(allDescendentRegions.join().split(",")),
+    ]}`
+  );
   const allDescendentInvestableRegions = [
     ...new Set(
       investable
@@ -295,9 +299,9 @@ async function getInvestableProperties(top_level_region) {
     ),
   ];
   console.log(allDescendentInvestableRegions);
-  const filteredRegions = [
-    ...new Set(allDescendentRegions.join().split(",")),
-  ].filter((record) => allDescendentInvestableRegions.includes(record));
+  const filteredRegions = flatArrayAndFilterDuplicates(
+    allDescendentRegions
+  ).filter((record) => allDescendentInvestableRegions.includes(record));
   console.log(
     `This is the whole tree for ${top_level_region} = ${filteredRegions} filtering ${investable}`
   );
@@ -337,6 +341,10 @@ function filterDescendentNames(top_level_region, regions) {
     .map((region) => {
       return region.name;
     });
+}
+
+function flatArrayAndFilterDuplicates(array) {
+  return [...new Set(array.join().split(","))];
 }
 
 /* helpers to get you started */
