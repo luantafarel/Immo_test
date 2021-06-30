@@ -327,4 +327,4 @@ function filterDescendentNames(top_level_region, regions) {
 //getInvestableRegions().then(displayResults);
 //getPropertiesByRegion('twickenham').then(displayResults)
 //getAllParentRegions('richmond upon thames').then(displayResults);;
-getInvestableProperties("heywoods").then(displayResults);
+getInvestableProperties("camden town").then(displayResults);

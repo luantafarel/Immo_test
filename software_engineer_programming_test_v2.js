@@ -283,9 +283,24 @@ async function getInvestableProperties(top_level_region) {
     top_level_region,
     regions
   );
+  console.log(`This is the whole tree for ${top_level_region} = ${[...new Set(allDescendentRegions.join().split(","))]}`)
+  const allDescendentInvestableRegions = [
+    ...new Set(
+      investable
+        .map((invest) => {
+          return getAllDescendentRegions(invest, regions);
+        })
+        .join()
+        .split(",")
+    ),
+  ];
+  console.log(allDescendentInvestableRegions);
   const filteredRegions = [
     ...new Set(allDescendentRegions.join().split(",")),
-  ].filter((record) => investable.includes(record));
+  ].filter((record) => allDescendentInvestableRegions.includes(record));
+  console.log(
+    `This is the whole tree for ${top_level_region} = ${filteredRegions} filtering ${investable}`
+  );
   return getPropertiesByRegion(filteredRegions.join());
 }
 
@@ -305,6 +320,8 @@ function getAllDescendentRegions(
     top_level_region,
     allRegions
   );
+  console.log(top_level_region);
+  descendantRegions = descendantRegions.concat(top_level_region);
   return filteredDescendents.map((filteredDescendent) => {
     return getAllDescendentRegions(
       filteredDescendent,
@@ -328,3 +345,4 @@ function filterDescendentNames(top_level_region, regions) {
 //getPropertiesByRegion('twickenham').then(displayResults)
 //getAllDescendentRegions('richmond upon thames').then(displayResults);;
 getInvestableProperties("manchester").then(displayResults);
+getInvestableProperties("london").then(displayResults);
