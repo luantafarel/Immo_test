@@ -284,20 +284,16 @@ async function getInvestableProperties(top_level_region) {
     regions
   );
   console.log(
-    `This is the whole tree for ${top_level_region} = ${[
-      ...new Set(allDescendentRegions.join().split(",")),
-    ]}`
+    `This is the whole tree for ${top_level_region} = ${flatArrayAndFilterDuplicates(allDescendentRegions)}`
   );
-  const allDescendentInvestableRegions = [
-    ...new Set(
-      investable
-        .map((invest) => {
-          return getAllDescendentRegions(invest, regions);
-        })
-        .join()
-        .split(",")
-    ),
-  ];
+  const allDescendentInvestableRegions = flatArrayAndFilterDuplicates(
+    investable
+      .map((invest) => {
+        return getAllDescendentRegions(invest, regions);
+      })
+      .join()
+      .split(",")
+  );
   console.log(allDescendentInvestableRegions);
   const filteredRegions = flatArrayAndFilterDuplicates(
     allDescendentRegions
