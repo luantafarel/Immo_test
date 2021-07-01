@@ -284,8 +284,9 @@ async function getInvestableProperties(top_level_region) {
     regions
   );
   console.log(
-    `This is the whole tree for ${top_level_region} = ${flatArrayAndFilterDuplicates(allDescendentRegions)}`
+    `This is the whole tree for ${top_level_region} = `
   );
+  console.log(flatArrayAndFilterDuplicates(allDescendentRegions))
   const allDescendentInvestableRegions = flatArrayAndFilterDuplicates(
     investable
       .map((invest) => {
@@ -320,7 +321,6 @@ function getAllDescendentRegions(
     top_level_region,
     allRegions
   );
-  console.log(top_level_region);
   descendantRegions = descendantRegions.concat(top_level_region);
   return filteredDescendents.map((filteredDescendent) => {
     return getAllDescendentRegions(
@@ -349,4 +349,4 @@ function flatArrayAndFilterDuplicates(array) {
 //getPropertiesByRegion('twickenham').then(displayResults)
 //getAllDescendentRegions('richmond upon thames').then(displayResults);;
 getInvestableProperties("manchester").then(displayResults);
-getInvestableProperties("london").then(displayResults);
+//getInvestableProperties("london").then(displayResults);
